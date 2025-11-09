@@ -1,0 +1,39 @@
+from collections import deque
+
+q=deque()
+
+def add_event(e):
+    q.append(e)
+
+def process_event():
+    if q:
+        print("Processed:",q.popleft())
+    else:
+        print("No events")
+
+def display_events():
+    if q:
+        print("Pending:",list(q))
+    else:
+        print("No pending events")
+
+def cancel_event(e):
+    if e in q:
+        q.remove(e)
+        print("Canceled:",e)
+    else:
+        print("Event not found")
+
+while True:
+    print("\n1.Add  2.Process  3.Display  4.Cancel  5.Exit")
+    ch=int(input())
+    if ch==1:
+        add_event(input("Enter event: "))
+    elif ch==2:
+        process_event()
+    elif ch==3:
+        display_events()
+    elif ch==4:
+        cancel_event(input("Enter event to cancel: "))
+    elif ch==5:
+        break
