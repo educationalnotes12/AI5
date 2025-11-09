@@ -1,0 +1,40 @@
+from collections import deque
+
+q=deque()
+
+def addCall(cid,ctime):
+    q.append((cid,ctime))
+
+def answerCall():
+    if q:
+        c=q.popleft()
+        print("Answered Call:",c[0],"Time:",c[1])
+    else:
+        print("No calls to answer")
+
+def viewQueue():
+    if q:
+        print("Current Queue:")
+        for c in q:
+            print("Customer:",c[0],"Time:",c[1])
+    else:
+        print("Queue is empty")
+
+def isQueueEmpty():
+    print("Queue Empty:",len(q)==0)
+
+while True:
+    print("\n1.Add Call  2.Answer Call  3.View Queue  4.Check Empty  5.Exit")
+    ch=int(input())
+    if ch==1:
+        cid=input("Enter Customer ID: ")
+        ctime=int(input("Enter Call Time (min): "))
+        addCall(cid,ctime)
+    elif ch==2:
+        answerCall()
+    elif ch==3:
+        viewQueue()
+    elif ch==4:
+        isQueueEmpty()
+    elif ch==5:
+        break
