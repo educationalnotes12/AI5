@@ -1,0 +1,29 @@
+borrow_records = {
+    "Book A": 12,
+    "Book B": 7,
+    "Book C": 0,
+    "Book D": 25,
+    "Book E": 3,
+    "Book F": 25
+}
+
+avg = sum(borrow_records.values()) / len(borrow_records)
+print("Average:", avg)
+
+max_book = max(borrow_records, key=borrow_records.get)
+min_book = min(borrow_records, key=borrow_records.get)
+print("Highest:", max_book, "=", borrow_records[max_book])
+print("Lowest:", min_book, "=", borrow_records[min_book])
+
+no_borrow = sum(1 for v in borrow_records.values() if v==0)
+print("the book with zero borrowed :", no_borrow)
+
+counts = list(borrow_records.values())
+most_freq_borrow = max(set(counts), key=counts.count)
+print("Most frequently borrowed count:", most_freq_borrow)
+
+books = [b for b, c in borrow_records.items() if c == most_freq_borrow]
+print("Books with that count:", books)
+
+print("Time Complexity: O(n) for all operations")
+print("Space Complexity: O(n) for mode, O(1) for others")
