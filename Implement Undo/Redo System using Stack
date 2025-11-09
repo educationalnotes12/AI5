@@ -1,0 +1,64 @@
+class TextEditor:
+    def __init__(self):
+        self.undo_stack = []   
+        self.redo_stack = []   
+        self.document = ""   
+
+    def make_change(self, text):
+        self.undo_stack.append(self.document)  
+        self.document = text                   
+        self.redo_stack.clear()                 
+        print("Change made successfully.")
+
+   
+    def undo(self):
+        if not self.undo_stack:
+            print("Nothing to undo!")
+            return
+        self.redo_stack.append(self.document)
+        self.document = self.undo_stack.pop()
+        print("Undo performed successfully.")
+
+   
+    def redo(self):
+        if not self.redo_stack:
+            print("Nothing to redo!")
+            return
+        self.undo_stack.append(self.document)
+        self.document = self.redo_stack.pop()
+        print("Redo performed successfully.")
+
+    
+    def display(self):
+        print("\nCurrent Document Content:")
+        print(self.document if self.document else "[Empty Document]")
+
+
+
+if __name__ == "__main__":
+    editor = TextEditor()
+
+    while True:
+        print("\n--- Text Editor Menu ---")
+        print("1. Make a Change")
+        print("2. Undo Last Change")
+        print("3. Redo Last Change")
+        print("4. Display Document")
+        print("5. Exit")
+
+        choice = int(input("Enter your choice: "))
+
+        if choice == 1:
+            text = input("Enter new document content: ")
+            editor.make_change(text)
+        elif choice == 2:
+            editor.undo()
+        elif choice == 3:
+            editor.redo()
+        elif choice == 4:
+            editor.display()
+        elif choice == 5:
+            print("Exiting... Goodbye!")
+            break
+        else:
+            print("Invalid choice! Try again.")
