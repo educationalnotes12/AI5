@@ -1,0 +1,73 @@
+class Node:
+    def __init__(self,data):
+        self.data=data
+        self.left=None
+        self.right=None
+
+class BST:
+    def __init__(self):
+        self.root=None
+
+    def insert(self,root,data):
+        if root is None:
+            return Node(data)
+        if data<root.data:
+            root.left=self.insert(root.left,data)
+        elif data>root.data:
+            root.right=self.insert(root.right,data)
+        return root
+
+    def search(self,root,key):
+        if root is None or root.data==key:
+            return root
+        if key<root.data:
+            return self.search(root.left,key)
+        return self.search(root.right,key)
+
+    def delete(self,root,key):
+        if root is None:
+            return root
+        if key<root.data:
+            root.left=self.delete(root.left,key)
+        elif key>root.data:
+            root.right=self.delete(root.right,key)
+        else:
+            if root.left is None:
+                return root.right
+            elif root.right is None:
+                return root.left
+            t=self.minValue(root.right)
+            root.data=t.data
+            root.right=self.delete(root.right,t.data)
+        return root
+
+    def minValue(self,node):
+        c=node
+        while c.left is not None:
+            c=c.left
+        return c
+
+    def inorder(self,root):
+        if root:
+            self.inorder(root.left)
+            print(root.data,end=" ")
+            self.inorder(root.right)
+
+b=BST()
+root=None
+while True:
+    print("\n1.Insert 2.Delete 3.Search 4.Display 5.Exit")
+    ch=int(input())
+    if ch==1:
+        x=int(input("Enter value: "))
+        root=b.insert(root,x)
+    elif ch==2:
+        x=int(input("Enter value to delete: "))
+        root=b.delete(root,x)
+    elif ch==3:
+        x=int(input("Enter value to search: "))
+        print("Found" if b.search(root,x) else "Not Found")
+    elif ch==4:
+        b.inorder(root)
+    elif ch==5:
+        break
