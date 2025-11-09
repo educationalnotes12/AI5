@@ -1,0 +1,29 @@
+class Search:
+def __init__(self):
+self.arr = [1, 2, 3, 4, 5]
+self.data = 4
+def linear_search(self, arr, data):
+for i in arr:
+if i == data:
+return True
+return False
+
+
+def binary_search(self, arr, data):
+low = 0
+high = len(arr) - 1
+while low <= high:
+mid = (low + high) // 2
+if arr[mid] == data:
+return True
+elif arr[mid] > data:
+high = mid - 1
+else:
+low = mid + 1
+return False
+
+
+if __name__ == "__main__":
+obj = Search()
+print("Element found (Linear Search):", obj.linear_search(obj.arr, obj.data))
+print("Element found (Binary Search):", obj.binary_search(obj.arr, obj.data))
